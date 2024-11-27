@@ -1,0 +1,16 @@
+{
+  "name": "projetos",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Lucas",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "express": "^4.21.1"
+  },
+  "description": ""
+}
