@@ -1,24 +1,43 @@
-// Importando o Joi (validação)
-import joi from "joi";
-
-// Validação para inclusão de modelo carro
-export const modeloCarro = joi.object({
- nome: joi.string().min(3).required(), // Nome do carro Min, 3 caracter
- sigla: joi.string().length(3).required(), // Sigla do carro, 3 caracter
- potencia: joi.number().min(1).required(), // Potencia mínima de 3 Cv
- velocidadeMaxima: joi.number().min(1).required(), // Velocidade min. de 1
- consumo: joi.number().min(0.1).required(), // Consumo mínimo de 0.1
- aceleracao: joi.number().min(0).required(), // Aceleração min. de 0
- preco: joi.number().min(0).required(), // Preço min. de 0
+import Joi from "joi";
+ 
+export const modeloCarro = Joi.object({
+    nome: Joi.string().min(3).required().messages({
+        'string.min':'O nome carro deve ter pelo menos 3 caracters',
+        'any required':'O nome do carro é Obrigatorio'}),
+    sigla: Joi.string().length(3).required().messages({
+        'string.lengh':'A sigla deve ter exatamente 3 caracteres',
+        'any.required':'A sigla é obrigatorio'
+    }),
+    potencia: Joi.number().min(1).required().messages({
+        'string.min':'A potencia deve ser maior ou igual a 1.',
+        'any.required':'A potencia é obrigatoria'
+    }),
+    velocidadeMaxima: Joi.number().min(1).required().messages({
+        'number.min':'A velocidade maxima deve ser maior ou igual 1.',
+        'any.required':'A velocidade maxima é obrigatoria'
+    }),
+    consumo: Joi.number().min(0.1).required().messages({
+        'number.min':'O consumo deve ser maior ou igual a 1.',
+        'any.required':'O consumo é obrigatoria'
+    }),
+    aceleracao: Joi.number().min(0).required().messages({
+        'number.min':'A Aceleração deve ser maior ou igual a 1.',
+        'any.required':'A acelerção é obrigatoria'
+    }),
+    preco: Joi.number().min(0).required().messages({
+        'number.min':'O preço deve ser maior ou igual a 1.',
+        'any.required':'O preço é obrigatoria'
+    }),
 });
-
-export const ModeloAtualizacaoCarro = joi.object({
-    nome: joi.string().min(3), // Nome do carro, opcional
-    sigla: joi.string().length(3), // sigla do carro, opcional
-    potencia: joi.number().min(1),// Potencia, opcional
-    VelocidadeMaxima: joi.number().min(1),// Velocidade Maxima, opcional
-    consumo: joi.number().min(0.1),
-    aceleracao: joi.number().min(0),
-    preco: joi.number().min(0),
-    //ano: joi.number().integer().min(1886)
-}).min(1);  // Pelo menos um campo precisa ser atualizado
+ 
+ 
+export const modeloAtualizacaoCarro = Joi.object({
+    nome: Joi.string().min(3),
+    sigla: Joi.string().length(3),
+    potencia:Joi.number().min(1),
+    velocidadeMaxima: Joi.number().min(1),
+    consumo: Joi.number().min(0.1),
+    aceleracao: Joi.number().min(0),
+    preco: Joi.number().min(0),
+    ano: Joi.number().integer().min(1886).max(new Date().getFullYear()),
+}).min(1);
